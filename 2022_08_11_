@@ -1,0 +1,39 @@
+2022-08-11 18:15:08.482295 [info]: deal with the client(192.168.10.1)
+2022-08-11 18:15:08.482617 [info]: adjust timer once
+2022-08-11 18:15:08.482736 [info]: GET / HTTP/1.1
+2022-08-11 18:15:08.482765 [info]: Host: 192.168.10.132:9999
+2022-08-11 18:15:08.482787 [info]: Connection: keep-alive
+2022-08-11 18:15:08.482792 [info]: Upgrade-Insecure-Requests: 1
+2022-08-11 18:15:08.482796 [info]: oop!unknow header: Upgrade-Insecure-Requests: 1
+2022-08-11 18:15:08.482800 [info]: User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.81 Safari/537.36 Edg/104.0.1293.47
+2022-08-11 18:15:08.482803 [info]: oop!unknow header: User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.81 Safari/537.36 Edg/104.0.1293.47
+2022-08-11 18:15:08.482811 [info]: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-08-11 18:15:08.482816 [info]: oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-08-11 18:15:08.482829 [info]: Purpose: prefetch
+2022-08-11 18:15:08.482833 [info]: oop!unknow header: Purpose: prefetch
+2022-08-11 18:15:08.482836 [info]: Accept-Encoding: gzip, deflate
+2022-08-11 18:15:08.482840 [info]: oop!unknow header: Accept-Encoding: gzip, deflate
+2022-08-11 18:15:08.482843 [info]: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6
+2022-08-11 18:15:08.482847 [info]: oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6
+2022-08-11 18:15:08.482850 [info]: 
+2022-08-11 18:15:08.483201 [info]: request:HTTP/1.1 200 OK
+
+2022-08-11 18:15:08.483215 [info]: request:HTTP/1.1 200 OK
+Content-Length:979
+
+2022-08-11 18:15:08.483219 [info]: request:HTTP/1.1 200 OK
+Content-Length:979
+Connection:keep-alive
+
+2022-08-11 18:15:08.483223 [info]: request:HTTP/1.1 200 OK
+Content-Length:979
+Connection:keep-alive
+
+
+2022-08-11 18:15:08.483398 [info]: send data to the client(192.168.10.1)
+2022-08-11 18:15:08.483435 [info]: adjust timer once
+2022-08-11 18:15:11.777062 [info]: timer tick
+2022-08-11 18:15:16.778029 [info]: timer tick
+2022-08-11 18:15:21.778778 [info]: timer tick
+2022-08-11 18:15:26.779926 [info]: timer tick
+2022-08-11 18:15:26.780154 [info]: close fd 16

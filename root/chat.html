@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>简易聊天室</title>
+    <style type="text/css">
+        
+		@media screen and (min-width: 320px) and (max-width: 1156px){
+			.talk_con_mob{
+				width:600px;
+				height:500px;
+				border:1px solid #666;
+				margin:50px auto 0;
+				background:#f9f9f9;
+			}
+			.talk_show_mob{
+				width:580px;
+				height:420px;
+				border:1px solid #666;
+				background:#fff;
+				margin:10px auto 0;
+				overflow:auto;
+			}
+			.talk_input_mob{
+				width:580px;
+				margin:10px auto 0;
+			}
+			.talk_word_mob{
+				width:420px;
+				height:26px;
+				padding:0px;
+				float:left;
+				margin-left:10px;
+				outline:none;
+				text-indent:10px;
+			}  
+		}
+			.talk_con{
+				width:600px;
+				height:500px;
+				border:1px solid #666;
+				margin:50px auto 0;
+				background:#f9f9f9;
+			}
+			.talk_show{
+				width:580px;
+				height:420px;
+				border:1px solid #666;
+				background:#fff;
+				margin:10px auto 0;
+				overflow:auto;
+			}
+			.talk_input{
+				width:580px;
+				margin:10px auto 0;
+			}
+			.whotalk{
+				width:80px;
+				height:30px;
+				float:left;
+				outline:none;
+			}
+			.talk_word{
+				width:420px;
+				height:26px;
+				padding:0px;
+				float:left;
+				margin-left:10px;
+				outline:none;
+				text-indent:10px;
+			}         
+			.talk_sub{
+				width:56px;
+				height:30px;
+				float:right;
+				margin-right:10px;
+			}
+			.atalk{
+			   margin:10px; 
+			}
+			.atalk span{
+				display:inline-block;
+				background:#0181cc;
+				border-radius:10px;
+				color:#fff;
+				padding:5px 10px;
+			}
+			.btalk{
+				margin:10px;
+				text-align:right;
+			}
+			.btalk span{
+				display:inline-block;
+				background:#ef8201;
+				border-radius:10px;
+				color:#fff;
+				padding:5px 10px;
+			} 
+    </style>
+    <script type="text/javascript">   
+		var Words;
+		var TalkWords;
+        var TalkSub;
+		var xhr;
+		
+		function InputPress() {
+			if (event.keyCode == 13) { 
+				chatRoom();
+			}	
+		} 
+		
+		function chatRoom(){
+			//定义空字符串
+			var str = "";
+			if(TalkWords.value == ""){
+				 // 消息为空时弹窗
+				alert("消息不能为空");
+				return;
+			}
+			str = '<div class="btalk"><span>' + TalkWords.value +'</span></div>' ;  
+			
+			toChat2("10000000051", "inner", TalkWords.value , "wx", "", "oXFEUwvf_exNy6VLr9nGrxrvAPxQ");
+			
+			// 将之前的内容与要发的内容拼接好 提交
+			Words.innerHTML = Words.innerHTML + str;
+		}
+		
+		function toChat2(enterpriseID,platform, query, source,userStatus,username){
+			var url = "http://192.168.10.132:9007/home/linux/TinyWebServer/root"; 
+			xhr.onreadystatechange = toPostProcess;
+			xhr.open("post", url, true);  
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  
+			xhr.send(JSON.stringify({
+				"enterpriseID": enterpriseID,
+				"platform": platform,
+				"query": query,
+				"source": source,
+				"userStatus": userStatus,
+				"username": username 
+			})); 
+			console.log("ok"); 
+		} 
+		
+		function toPostProcess() {/*设置当获XHR对象获取到返回信息后执行以下代码*/ 
+			if (xhr.readyState === 4) { 
+				if (xhr.status === 200) {
+					res = xhr.responseText;
+					var obj = eval ("(" + res + ")");
+					console.log("res ok:" +res); 
+					try {   
+						var textReply = obj.result.content; 
+						str = '<div class="atalk"><span>' + textReply +'</span></div>';   
+						// 将之前的内容与要发的内容拼接好 提交
+						Words.innerHTML = Words.innerHTML + str; 
+						
+						// 置空
+						TalkWords.value = "";
+						// 滑动到最底部
+						Words.scrollTop = Words.scrollHeight;
+					} catch (e) {
+						return handleError(xhr, e);
+					}  
+				} else {
+					console.log("可能存在跨域问题，解决即可"); 
+				}  
+			} 
+		}		
+		
+		function GetXmlHttpObject() {
+			var xmlHttp=null; 
+			try {
+				// Firefox, Opera 8.0+, Safari
+				console.log("XMLHttpRequest"); 
+				 xmlHttp=new XMLHttpRequest();
+			} catch (e) {
+				// Internet Explorer
+				try {
+					console.log("Msxml2"); 
+					xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					console.log("Microsoft"); 
+					xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+			}
+			return xmlHttp;
+		}
+		
+		
+		//is moblie
+		var sUserAgent = navigator.userAgent.toLowerCase();
+		var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+		var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+		var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+		var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+		var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+		var bIsAndroid = sUserAgent.match(/android/i) == "android";
+		var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+		var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+		
+		
+        window.onload = function(){  
+			Words = document.getElementById("words"); 
+			TalkWords = document.getElementById("talkwords");
+			TalkSub = document.getElementById("talksub"); 
+			xhr = new GetXmlHttpObject(); 
+            TalkSub.onclick = function(){ 
+				chatRoom();			
+            }   
+			//is mobile
+			if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+				console.log("手机");  
+				document.getElementById('talk_con_id').className = 'talk_con_mob';		
+				document.getElementById('words').className = 'talk_show_mob';	
+				document.getElementById('talk_input_id').className = 'talk_input_mob';	
+				document.getElementById('talkwords').className = 'talk_word_mob';	
+			} else {
+				console.log("电脑"); 
+				document.getElementById('talk_con_id').className = 'talk_con';
+				document.getElementById('words').className = 'talk_show';	
+				document.getElementById('talk_input_id').className = 'talk_input';	
+				document.getElementById('talkwords').className = 'talk_word';	
+			}
+        }
+    </script>
+</head>
+<body>
+    <div class="talk_con" id="talk_con_id">
+        <div class="talk_show" id="words">
+            <div class="atalk"><span id="asay">欢迎进入模拟客户聊天</span></div>
+            <!--- div class="btalk"><span id="bsay">用户说：还没呢，你呢？</span></div --->
+        </div>
+        <div class="talk_input"  id="talk_input_id">>
+            <input type="text" class="talk_word" id="talkwords" onkeypress="InputPress()">
+            <input type="button" value="发送" class="talk_sub" id="talksub" >
+        </div>
+    </div>
+</body>
+</html>
